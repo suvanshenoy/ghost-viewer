@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  clean:build:
+    cmd: gradle clean build {{.CLI_ARGS}}
+
+  build:
+    cmd: gradle build {{.CLI_ARGS}}
+
+  package:jar:
+    cmd: gradle jar {{.CLI_ARGS}}
+
+  run:cli:
+    cmd: gradle :ghost-viewer-cli:run {{.CLI_ARGS}}
+
+  metadata-copy:cli:
+    cmds:
+      - gradle :ghost-viewer-cli:metadataCopy --task run --dir src/main/resources/META-INF/native-image
+
+  compile:cli:
+    cmd: gradle :ghost-viewer-cli:nativeCompile
+
+  compile:run:cli:
+    cmd: gradle :ghost-viewer-cli:nativeRun
+
+  run:watch:
+    cmd: watchexec -c -r -e java,kts -- task run
+
+  run:watch:cli:
+    cmd: watchexec -c -r -e java,kts -- task run:cli
+
+  test:
+    cmd: gradle cleanTest test {{.CLI_ARGS}}
+
+  test:watch:
+    cmd: watchexec -c -r -e java,kts -- task test

@@ -1,0 +1,4 @@
+[tools]
+graalvm = "25"
+gradle = "9"
+java = "25"
