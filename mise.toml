@@ -1,0 +1,5 @@
+[tools]
+"aqua:go-task/task" = "latest"
+dprint = "latest"
+erlang = "latest"
+gleam = "latest"

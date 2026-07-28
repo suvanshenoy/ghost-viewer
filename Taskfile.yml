@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  compile:
+    cmd: gleam export escript
+
+  compile:run:
+    cmds:
+      - task: compile
+      - ./ghost_viewer {{.CLI_ARGS}}
+
+  test:
+    cmd: gleam test {{.CLI_ARGS}}
+
+  test:watch:
+    cmd: watchexec -r -c -e gleam -- task test -- {{.CLI_ARGS}}
+
+  cleanup:
+    cmds:
+      - gleam clean
+      - defer: rm ghost_viewer
