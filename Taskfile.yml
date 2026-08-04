@@ -9,7 +9,8 @@ tasks:
   compile:run:
     cmds:
       - task: compile
-      - ./ghost_viewer {{.CLI_ARGS}}
+      - mv ghost_viewer ghost-viewer
+      - ./ghost-viewer {{.CLI_ARGS}}
 
   test:
     cmd: gleam test {{.CLI_ARGS}}

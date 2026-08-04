@@ -3,4 +3,4 @@
 /build
 erl_crash.dump
 bin
-ghost_viewer
+ghost-viewer
