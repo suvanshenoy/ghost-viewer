@@ -4,12 +4,13 @@ version: "3"
 
 tasks:
   compile:
-    cmd: gleam export escript
+    cmds:
+      - gleam export escript
+      - mv ghost_viewer ghost-viewer
 
   compile:run:
     cmds:
       - task: compile
-      - mv ghost_viewer ghost-viewer
       - ./ghost-viewer {{.CLI_ARGS}}
 
   test:
