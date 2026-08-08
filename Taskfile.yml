@@ -2,15 +2,25 @@
 
 version: "3"
 
+vars:
+  EXECUTABLE: ghost_viewer
+
 tasks:
   compile:
-    cmd: gleam export escript
+    cmds:
+      - gleam export escript
+      - sudo cp -rvf {{.EXECUTABLE}} /usr/local/bin/{{.EXECUTABLE | replace "_" "-"}}
+    sources:
+      - src/**/*
+    generates:
+      - ./{{.EXECUTABLE}}
+    status:
+      - test -f ./{{.EXECUTABLE}}
 
   compile:run:
     cmds:
       - task: compile
-      - mv ghost_viewer ghost-viewer
-      - ./ghost-viewer {{.CLI_ARGS}}
+      - '{{.EXECUTABLE | replace "_" "-"}} {{.CLI_ARGS}}'
 
   test:
     cmd: gleam test {{.CLI_ARGS}}
@@ -21,4 +31,4 @@ tasks:
   cleanup:
     cmds:
       - gleam clean
-      - defer: rm ghost_viewer
+      - defer: rm {{.EXECUTABLE}}
