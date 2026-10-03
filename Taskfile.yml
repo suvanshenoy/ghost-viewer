@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+vars:
+  EXECUTABLE: ghost-viewer
+
+tasks:
+  compile:
+    cmds:
+      - bun tsc
+      - bun build --compile --minify  --outfile=bin/{{.EXECUTABLE}} lib/{{.EXECUTABLE}}.ts
+    sources:
+      - lib/**/*
+    generates:
+      - ./bin/{{.EXECUTABLE}}
+    status:
+      - test -f ./bin/{{.EXECUTABLE}}
+
+  compile:run:
+    cmds:
+      - task: compile
+      - "./bin/{{.EXECUTABLE}} {{.CLI_ARGS}}"
+
+  biome:check:
+    cmd: bun biome check {{.CLI_ARGS}}
+
+  biome:migrate:
+    cmd: bun biome migrate --write
+
+  test:
+    cmd: bun vitest {{.CLI_ARGS}}
+
+  cleanup:
+    cmds:
+      - rm -r node_modules
+      - rm -r bin

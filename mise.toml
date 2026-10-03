@@ -1,0 +1,5 @@
+[tools]
+"aqua:go-task/task" = "latest"
+bun = "latest"
+dprint = "latest"
+node = "lts"

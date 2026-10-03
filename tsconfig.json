@@ -1,0 +1,25 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"compilerOptions": {
+		"module": "esnext",
+		"target": "esnext",
+		"moduleDetection": "force",
+		"moduleResolution": "bundler",
+		"esModuleInterop": true,
+		"noEmit": true,
+		"allowSyntheticDefaultImports": true,
+		"allowImportingTsExtensions": true,
+		"types": ["node", "bun", "vitest"],
+		"strict": true,
+		"useUnknownInCatchVariables": true,
+		"noUnusedParameters": true,
+		"noUncheckedSideEffectImports": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"noImplicitReturns": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"noImplicitOverride": true,
+		"skipLibCheck": true
+	}
+}
