@@ -9,7 +9,8 @@ tasks:
   compile:
     cmds:
       - bun tsc
-      - bun build --compile --minify  --outfile=bin/{{.EXECUTABLE}} lib/{{.EXECUTABLE}}.ts
+      - bun build --compile --minify  --outfile=bin/{{.EXECUTABLE}} lib/{{.EXECUTABLE}}.mts
+      - sudo cp -rvf ./bin/{{.EXECUTABLE}} /usr/local/bin/{{.EXECUTABLE}}
     sources:
       - lib/**/*
     generates:
@@ -20,7 +21,7 @@ tasks:
   compile:run:
     cmds:
       - task: compile
-      - "./bin/{{.EXECUTABLE}} {{.CLI_ARGS}}"
+      - "{{.EXECUTABLE}} {{.CLI_ARGS}}"
 
   biome:check:
     cmd: bun biome check {{.CLI_ARGS}}
